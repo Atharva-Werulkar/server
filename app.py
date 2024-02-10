@@ -6,7 +6,7 @@ xgb = joblib.load('xgboost_model.pkl')
 
 app = Flask(__name__)
 
-@app.route('/a', methods=['POST'])
+@app.route('/', methods=['POST'])
 def predict():
     try:
         data = request.json['data']

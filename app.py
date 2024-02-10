@@ -5,7 +5,7 @@ import numpy as np
 
 xgb = joblib.load('xgboost_model.pkl')
 
-app = Flask(_name)  # Use __name_ instead of name
+app = Flask(_name_)  # Use __name_ instead of name
 
 @app.route('/', methods=['POST'])
 def predict():

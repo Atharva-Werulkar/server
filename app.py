@@ -25,6 +25,7 @@ def extract_features(audio_files):
     return np.array(features)
 
 @app.route('/', methods=['POST'])
+
 def predict():
     try:
         # Get audio file from request

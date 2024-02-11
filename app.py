@@ -31,7 +31,7 @@ def predict():
         # Get audio file from request
         file = request.files['file']
         # Save the audio file temporarily
-        audio_path = 'temp_audio.wav'  # Ensure the file extension is ".wav"
+        audio_path = 'temp_audio.wav'  
         file.save(audio_path)
         
         # Extract features from the audio file

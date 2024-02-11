@@ -4,7 +4,7 @@ import numpy as np
 
 xgb = joblib.load('xgboost_model.pkl')
 
-app = Flask(name)  # Use _name instead of name
+app = Flask(__name__)  # Use _name instead of name
 
 @app.route('/', methods=['POST'])
 def predict():
@@ -30,5 +30,5 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e)}), 400
 
-if name == 'main':  # Use __name instead of name
+if __name__ == 'main':  # Use __name instead of name
     app.run(debug=True)

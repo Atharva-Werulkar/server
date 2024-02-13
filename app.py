@@ -43,7 +43,7 @@ def predict():
         # Note: You need to adapt this part to fit your model's input requirements
         
         # Dummy prediction for testing
-        prediction = 1
+       # prediction = 1
         
         return jsonify({'prediction': prediction}), 200
     except Exception as e:

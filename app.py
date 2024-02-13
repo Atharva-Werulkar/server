@@ -35,38 +35,39 @@
 
 from flask import Flask, request, jsonify
 import numpy as np
-from tensorflow.keras.models import load_model
-from pydub import AudioSegment
+import joblib
+# from tensorflow.keras.models import load_model
+# from pydub import AudioSegment
 
 # Load the trained model
-model = load_model('xgboost_model.pkl')
+xgb = joblib.load('xgboost_model.pkl')
 
 # Function to preprocess the audio file
-def preprocess_audio(audio_file):
-    # Convert audio to wav format (if not already in wav)
-    sound = AudioSegment.from_file(audio_file)
-    if sound.channels != 1:
-        sound = sound.set_channels(1)
-    if sound.frame_rate != 16000:
-        sound = sound.set_frame_rate(16000)
-    if sound.sample_width != 2:
-        sound = sound.set_sample_width(2)
+# def preprocess_audio(audio_file):
+#     # Convert audio to wav format (if not already in wav)
+#     sound = AudioSegment.from_file(audio_file)
+#     if sound.channels != 1:
+#         sound = sound.set_channels(1)
+#     if sound.frame_rate != 16000:
+#         sound = sound.set_frame_rate(16000)
+#     if sound.sample_width != 2:
+#         sound = sound.set_sample_width(2)
 
-    # Ensure uniform length of audio (if required)
-    target_length = 16000  # Example target length
-    sound = sound.set_frame_rate(16000)
-    sound = sound.set_sample_width(2)
-    sound = sound.set_channels(1)
-    sound = sound.set_frame_rate(target_length)
-    sound = sound.set_channels(1)
-    sound = sound.set_sample_width(2)
-    sound = sound.set_frame_rate(target_length)
+#     # Ensure uniform length of audio (if required)
+#     target_length = 16000  # Example target length
+#     sound = sound.set_frame_rate(16000)
+#     sound = sound.set_sample_width(2)
+#     sound = sound.set_channels(1)
+#     sound = sound.set_frame_rate(target_length)
+#     sound = sound.set_channels(1)
+#     sound = sound.set_sample_width(2)
+#     sound = sound.set_frame_rate(target_length)
 
-    # Export the processed audio to a temporary file
-    temp_audio_file = 'processed_audio.wav'
-    sound.export(temp_audio_file, format='wav')
+#     # Export the processed audio to a temporary file
+#     temp_audio_file = 'processed_audio.wav'
+#     sound.export(temp_audio_file, format='wav')
     
-    return temp_audio_file
+#     return temp_audio_file
 
 app = Flask(__name__)
 
@@ -81,14 +82,14 @@ def predict():
         audio_file = request.files['file']
         
         # Preprocess the audio file
-        processed_audio_file = preprocess_audio(audio_file)
+        #processed_audio_file = preprocess_audio(audio_file)
         
         # Perform prediction using the loaded model
-        prediction = model.predict(processed_audio_file)
+        #prediction = model.predict(processed_audio_file)
         # Note: You need to adapt this part to fit your model's input requirements
         
         # Dummy prediction for testing
-        #prediction = 1
+        prediction = 1
         
         return jsonify({'prediction': prediction}), 200
     except Exception as e:

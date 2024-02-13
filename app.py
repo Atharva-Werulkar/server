@@ -39,7 +39,7 @@ from tensorflow.keras.models import load_model
 from pydub import AudioSegment
 
 # Load the trained model
-model = load_model('your_model_path.h5')
+model = load_model('xgboost_model.pkl')
 
 # Function to preprocess the audio file
 def preprocess_audio(audio_file):
@@ -84,11 +84,11 @@ def predict():
         processed_audio_file = preprocess_audio(audio_file)
         
         # Perform prediction using the loaded model
-        # Example: prediction = model.predict(processed_audio_file)
+        prediction = model.predict(processed_audio_file)
         # Note: You need to adapt this part to fit your model's input requirements
         
         # Dummy prediction for testing
-        prediction = 1
+        #prediction = 1
         
         return jsonify({'prediction': prediction}), 200
     except Exception as e:
